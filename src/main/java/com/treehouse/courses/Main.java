@@ -1,5 +1,8 @@
 package com.treehouse.courses;
 
+import com.treehouse.courses.model.CourseIdeaDAO;
+import com.treehouse.courses.model.SimpleCourseIdeaDAO;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +12,8 @@ import static spark.Spark.post;
 
 public class Main {
     public static void main(String[] args) {
+
+        CourseIdeaDAO dao = new SimpleCourseIdeaDAO();
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -23,6 +28,6 @@ public class Main {
             model.put("username", username);
             return render(model, "index");
         });
-        
+
     }
 }
