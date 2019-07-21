@@ -1,8 +1,5 @@
 package com.treehouse.courses;
 
-import spark.ModelAndView;
-import spark.template.thymeleaf.ThymeleafTemplateEngine;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,13 +12,17 @@ public class Main {
 
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
+            model.put("username", req.cookie("username"));
             return render(model, "index");
         });
 
-        post("/sign-in", (req, res) -> {
+        post("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("username", req.queryParams("username"));
-            return render(model, "sign-in");
+            String username = req.queryParams("username");
+            res.cookie("username", username);
+            model.put("username", username);
+            return render(model, "index");
         });
+        
     }
 }

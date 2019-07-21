@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <title>Hello Students</title>
     </head>
     <body>
-        <h1>Welcome Students</h1>
-        <!-- TODO:csd - add sign in-->
-        <form action="/sign-in" method="post">
-            <input type="text" placeholder="What's your name?" name="username">
-            <button type="submit">Sign In</button>
-        </form>
+        <h1 th:if="${username}" th:text="|Welcome ${username}!|"></h1>
+        <div th:unless="${username}" th:remove="tag">
+            <h1>Welcome Students</h1>
+            <!-- TODO:csd - add sign in-->
+            <form action="/" method="post">
+                <input type="text" placeholder="What's your name?" name="username">
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
     </body>
 </html>
