@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.treehouse.courses.RenderUtilities.render;
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class Main {
     public static void main(String[] args) {
+        staticFiles.location("/public"); // Static files
 
         CourseIdeaDAO dao = new SimpleCourseIdeaDAO();
 
