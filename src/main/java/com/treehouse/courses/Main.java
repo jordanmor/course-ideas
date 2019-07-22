@@ -1,5 +1,6 @@
 package com.treehouse.courses;
 
+import com.treehouse.courses.model.CourseIdea;
 import com.treehouse.courses.model.CourseIdeaDAO;
 import com.treehouse.courses.model.SimpleCourseIdeaDAO;
 
@@ -27,6 +28,21 @@ public class Main {
             res.cookie("username", username);
             model.put("username", username);
             return render(model, "index");
+        });
+
+        get("/ideas", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("ideas", dao.findAll());
+            return render(model, "ideas");
+        });
+
+        post("/ideas", (req, res) -> {
+            String title = req.queryParams("title");
+            // TODO:csd - This username is tied to the cookie implementation
+            CourseIdea courseIdea = new CourseIdea(title, req.cookie("username"));
+            dao.add(courseIdea);
+            res.redirect("/ideas");
+            return null;
         });
 
     }
