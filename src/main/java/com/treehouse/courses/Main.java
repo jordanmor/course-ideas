@@ -23,11 +23,10 @@ public class Main {
         });
 
         post("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
             String username = req.queryParams("username");
             res.cookie("username", username);
-            model.put("username", username);
-            return render(model, "index");
+            res.redirect("/");
+            return null;
         });
 
         get("/ideas", (req, res) -> {
