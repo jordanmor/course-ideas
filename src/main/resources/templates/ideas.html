@@ -6,7 +6,12 @@
 <div class="container mt-3">
     <h1>Course Ideas</h1>
     <ul>
-        <li th:each="idea : ${ideas}" th:text="${idea.title}"></li>
+        <li th:each="idea : ${ideas}">
+            <form th:action="@{../ideas/__${idea.slug}__/vote}" method="post">
+                <p th:text="|${idea.title} (${idea.voteCount} votes)|"></p>
+                <button class="btn btn-primary">Vote</button>
+            </form>
+        </li>
     </ul>
     <form action="/ideas" method="post">
         <input type="text" placeholder="What's your idea?" name="title">
