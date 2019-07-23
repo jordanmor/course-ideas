@@ -3,12 +3,12 @@
 <head th:replace="fragments/layout :: head (pageTitle = 'Course Ideas')"></head>
 <body>
 <header th:replace="fragments/layout :: header"></header>
-<div class="container mt-3">
+<div class="container mt-3 page">
     <h1>Course Ideas</h1>
     <ul>
         <li th:each="idea : ${ideas}">
             <form th:action="@{../ideas/__${idea.slug}__/vote}" method="post">
-                <p th:text="|${idea.title} (${idea.voteCount} votes)|"></p>
+                <a th:href="@{../ideas/__${idea.slug}__}" th:text="|${idea.title} (${idea.voteCount} votes)|"></a>
                 <button class="btn btn-primary">Vote</button>
             </form>
         </li>

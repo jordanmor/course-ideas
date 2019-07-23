@@ -6,6 +6,7 @@ import com.treehouse.courses.model.SimpleCourseIdeaDAO;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static com.treehouse.courses.RenderUtilities.render;
 import static spark.Spark.*;
@@ -54,6 +55,12 @@ public class Main {
             dao.add(courseIdea);
             res.redirect("/ideas");
             return null;
+        });
+
+        get("/ideas/:slug", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("idea", dao.findBySlug(req.params("slug")));
+            return render(model, "details");
         });
 
         post("/ideas/:slug/vote", (req, res) -> {

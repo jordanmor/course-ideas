@@ -3,7 +3,7 @@
     <head th:replace="fragments/layout :: head (pageTitle = 'Welcome Page')"></head>
     <body>
         <header th:replace="fragments/layout :: header"></header>
-        <div class="container mt-3">
+        <div class="container mt-3 page">
             <h1 th:if="${username}" th:text="|Welcome ${username}!|"></h1>
             <div th:unless="${username}" th:remove="tag">
                 <h1>Welcome Students</h1>

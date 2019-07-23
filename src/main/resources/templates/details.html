@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/layout :: head (pageTitle = 'Course Ideas')"></head>
+<body>
+<header th:replace="fragments/layout :: header"></header>
+<div class="container mt-3 page">
+    <h1 th:text="${idea.title}"></h1>
+<!--    <h2 th:text="|${idea.voteCount} Voters|"></h2>-->
+    <h2 th:text="${idea.voteCount == 1} ? |${idea.voteCount} Voter| : |${idea.voteCount} Voters|"></h2>
+    <ul>
+        <li  th:each="voter : ${idea.voters}" th:text="${voter}"></li>
+    </ul>
+    <form th:action="@{../ideas/__${idea.slug}__/vote}" method="post">
+        <button class="btn btn-primary">Vote</button>
+    </form>
+</div>
+<div th:replace="fragments/layout :: js_scripts"></div>
+</body>
+</html>
