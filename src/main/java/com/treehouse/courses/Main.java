@@ -2,7 +2,10 @@ package com.treehouse.courses;
 
 import com.treehouse.courses.model.CourseIdea;
 import com.treehouse.courses.model.CourseIdeaDAO;
+import com.treehouse.courses.model.NotFoundException;
 import com.treehouse.courses.model.SimpleCourseIdeaDAO;
+import spark.ModelAndView;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,6 +71,14 @@ public class Main {
             idea.addVoter(req.attribute("username"));
             res.redirect("/ideas");
             return null;
+        });
+
+        exception(NotFoundException.class, (exc, req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            res.status(404);
+            ThymeleafTemplateEngine engine = new ThymeleafTemplateEngine();
+            String html = engine.render(new ModelAndView(model, "not-found.html"));
+            res.body(html);
         });
 
     }

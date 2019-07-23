@@ -5,7 +5,6 @@
 <header th:replace="fragments/layout :: header"></header>
 <div class="container mt-3 page">
     <h1 th:text="${idea.title}"></h1>
-<!--    <h2 th:text="|${idea.voteCount} Voters|"></h2>-->
     <h2 th:text="${idea.voteCount == 1} ? |${idea.voteCount} Voter| : |${idea.voteCount} Voters|"></h2>
     <ul>
         <li  th:each="voter : ${idea.voters}" th:text="${voter}"></li>
